@@ -1,6 +1,6 @@
 import pandas as pd
 import re
-import json
+
 
 df = pd.read_csv('assets/LFA_HS_G1.csv')
 po = pd.read_csv('assets/palavras_ofensivas.txt')
@@ -36,6 +36,7 @@ def regex_construtor(palavra):
 
 if __name__ == '__main__':
 
+    #Array de objetos da class Comentarios
     comentarios = []
     palavras_ofensivas = []
     regex_palavras_ofensivas = []
@@ -74,10 +75,11 @@ if __name__ == '__main__':
                 comentario.eh_ofensivo = True
                 comentario.correspondencias.append("{match}".format(matchNum=matchNum,start=match.start(),end=match.end(),match=match.group()))
 
+    contator = 0
     for comentario in comentarios:
 
         if comentario.eh_ofensivo:
-
+            contator += 1
             print("Comentario: " + comentario.comentario)
             temp = "Palavras: "
             for x in comentario.palavras_ofensivas:
@@ -88,3 +90,4 @@ if __name__ == '__main__':
                 temp2 += x + " "
             print(temp2)
 
+print(contator)
